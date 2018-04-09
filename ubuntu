@@ -1,0 +1,60 @@
+基本上分三步走
+1，添加fcitx的键盘输入法系统，因为sogou是基于fcitx的，而系统默认的是iBus；
+2，安装sogou输入法；
+3，设置系统参数及一些注意点。
+ 
+第一步、添加fcitx键盘输入法系统
+①先添加以下源
+sudo add-apt-repository ppa:fcitx-team/nightly
+②添加源之后需要更新一下系统
+sudo apt-get update
+③开始安装fcitx
+sudo apt-get install fcitx
+④接着安装fcitx的配置工具
+sudo apt-get install fcitx-config-gtk
+⑤然后安装fcitx的table-all软件包
+sudo apt-get install fcitx-table-all
+⑥安装im-switch切换工具
+sudo apt-get install im-switch
+  (Note, selecting 'im-config' instead of 'im-switch'  im-config is already the newest version (0.29-1ubuntu12.4).)
+⑦ 看看我们的fcitx是否安装完成
+其实fcitx只是一个输入法工具,本身不带资源包的,所以Ubuntu下安装搜狗输入法，需要我们自己来下载搜狗输入法的资源包。
+第二步、安装sogou输入法
+①选择你操作系统的版本下载就可以了
+②用dpkg命令来安装搜狗输入法资源包
+sudo dpkg -i xxxx.deb
+这里会出现下面的错误：
+Preparing to unpack sogoupinyin_2.1.0.0082_amd64.deb ...
+Unpacking sogoupinyin (2.1.0.0082) ...
+Setting up sogoupinyin (2.1.0.0082) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for gnome-menus (3.13.3-6ubuntu3) ...
+Processing triggers for desktop-file-utils (0.22-1ubuntu5) ...
+Processing triggers for bamfdaemon (0.5.3~bzr0+16.04.20160415-0ubuntu1) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Processing triggers for shared-mime-info (1.5-2) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1) ...
+Processing triggers for libglib2.0-0:amd64 (2.48.0-1ubuntu4) ...
+No such key 'Gtk/IMModule' in schema 'org.gnome.settings-daemon.plugins.xsettings' as specified in override file '/usr/share/glib-2.0/schemas/50_sogoupinyin.gschema.override'; ignoring override for this key.
+
+可以不用管上面这个错误
+
+ 
+第三步、设置语言选项
+①到系统设置->语言支持，将键盘输入法系统由默认的iBus设置为fcitx
+②这个时候是看不到效果的，一定要注销一次
+③搜索出fcitx配置，将sogou输入法设为默认即可
+sogou-qimpanel 命令是启动搜狗输入法的。
+如果还是切换不出输入法，那么执行下面的操作：
+配置Fcitx的环境:在~/.bashrc中加入一下内容
+另外，在安装过程中遇到好几次这个问题，在网上查找到方法解决掉了，总结一下：
+
+Could not get lock /var/lib/dpkg/lock
+通过终端安装程序sudo apt-get install xxx时出错：
+E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+出现这个问题可能是有另外一个程序正在运行，导致资源被锁不可用。而导致资源被锁的原因可能是上次运行安装或更新时没有正常完成，进而出现此状况，解决的办法其实很简单：
+在终端中敲入以下两句
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock
+再试着安装，问题解决。
