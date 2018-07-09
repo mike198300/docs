@@ -1,0 +1,6 @@
+install python2 and python3 seperately, and insert the path to enviormental variable.
+change "python.exe" to "python2.exe", \
+run "python2 -m pip install --upgrade pip --force-reinstall" to change pip to pip2
+run "pip3 install jupyter" to install jupyter notebook
+run "python2 -m pip install ipykernel" and "python2 -m ipykernel install --user" to insert python2 kernal to jupyter
+then enjoy it!
