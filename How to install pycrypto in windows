@@ -1,10 +1,12 @@
-#How to install pycrypto in windows?
-1: install visual studio 2015
-2: make a enviorment variable:
+# How to install pycrypto in windows?
+- install visual studio 2015
+- make a enviorment variable:
     Name: VCINSTALLDIR 
     Value：C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC       # the path you install your vs in
-3: in cmd, excute:
-      set CL=/FI”%VCINSTALLDIR%\INCLUDE\stdint.h” %CL%
-4: then cd to the src dir you download, excute:
-    python setup.py install
-5: enjoy it!
+- in cmd, excute:
+
+         set CL=/FI”%VCINSTALLDIR%\INCLUDE\stdint.h” %CL%
+- then cd to the src dir you download, excute:
+
+          python setup.py install
+- enjoy it!
